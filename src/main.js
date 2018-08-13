@@ -26,10 +26,6 @@ for (let i = 0; i < 10; i++) {
 }
 
 game.run(() => {
-  cheeses.map(cheese => {
-    // Check for collisions with cheese
-    if (entity.hit(mouse, cheese)) {
-      relocate(cheese)
-    }
-  })
+  // Check for collisions with cheesees in container
+  entity.hits(mouse, cheeses, cheese => relocate(cheese))
 })
