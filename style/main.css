@@ -1,0 +1,9 @@
+body {
+    background: hsl(0, 0%, 2%);
+}
+
+#board {
+    width: 640px;
+    height: 480px;
+    margin: auto;
+}
