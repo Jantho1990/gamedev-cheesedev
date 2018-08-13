@@ -7,8 +7,8 @@ const { Game, KeyControls, math } = pop
 const game = new Game(640, 320)
 const { scene, w, h } = game
 
-const a = scene.add(new Mouse(new KeyControls()))
-const b = scene.add(new Cheese())
+const mouse = scene.add(new Mouse(new KeyControls()))
+const cheese = scene.add(new Cheese())
 
 const relocate = e => {
   const { pos } = e
@@ -16,18 +16,34 @@ const relocate = e => {
   pos.y = math.rand(h)
 }
 
-relocate(a)
-relocate(b)
+relocate(mouse)
+relocate(cheese)
 
 game.run(() => {
+  const { hitBox: aHit, pos: aPos } = mouse
+  const a = {
+    x: aHit.x + aPos.x,
+    y: aHit.y + aPos.y,
+    w: aHit.w,
+    h: aHit.h
+  }
+
+  const { hitBox: bHit, pos: bPos } = cheese
+  const b = {
+    x: bHit.x + bPos.x,
+    y: bHit.y + bPos.y,
+    w: bHit.w,
+    h: bHit.h
+  }
+
   // Bounding box detection
   if (
-    a.pos.x + a.w >= b.pos.x && // Mouse right edge overlaps cheese left edge
-    a.pos.x < b.pos.x + b.w && // Mouse left edge overlaps cheese right edge
-    a.pos.y + a.h >= b.pos.y && // Mouse bottom edge overlaps cheese top edge
-    a.pos.y < b.pos.y + b.h // Mouse top edge overlaps cheese bottom edge
+    a.x + a.w >= b.x && // Mouse right edge overlaps cheese left edge
+    a.x < b.x + b.w && // Mouse left edge overlaps cheese right edge
+    a.y + a.h >= b.y && // Mouse bottom edge overlaps cheese top edge
+    a.y < b.y + b.h // Mouse top edge overlaps cheese bottom edge
   ) {
     // Hit!
-    relocate(b)
+    relocate(cheese)
   }
 })

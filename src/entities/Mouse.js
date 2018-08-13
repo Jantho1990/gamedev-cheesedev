@@ -9,12 +9,18 @@ class Mouse extends Sprite {
     this.w = 100
     this.h = 51
     this.controls = controls
+    this.hitBox = {
+      x: 18,
+      y: 8,
+      w: 70,
+      h: 35
+    }
   }
 
   update(dt) {
     const { pos, controls } = this
     const { x, y } = controls
-    const speed = 100
+    const speed = 200
     pos.x += x * dt * speed
     pos.y += y * dt * speed
   }
