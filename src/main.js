@@ -2,7 +2,7 @@ import pop from '../pop'
 import Cheese from './entities/Cheese'
 import Mouse from './entities/Mouse'
 
-const { Game, KeyControls, math } = pop
+const { Game, KeyControls, entity, math } = pop
 
 const game = new Game(640, 320)
 const { scene, w, h } = game
@@ -18,6 +18,9 @@ const relocate = e => {
 
 relocate(mouse)
 relocate(cheese)
+
+entity.addDebug(mouse)
+entity.addDebug(cheese)
 
 game.run(() => {
   const { hitBox: aHit, pos: aPos } = mouse
