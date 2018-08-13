@@ -62,6 +62,9 @@ class CanvasRenderer {
             let { texture, pos } = child
             ctx.drawImage(texture.img, 0, 0)
           }
+        } else if (child.style && child.w && child.h) {
+          ctx.fillStyle = child.style.fill
+          ctx.fillRect(0, 0, child.w, child.h)
         }
 
         // Handle the child types
